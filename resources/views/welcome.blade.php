@@ -154,23 +154,29 @@
             });
         }
 
+        function viewContact(id) {
+    window.location.href = `/contact/${id}`;
+}
+
+
         function renderContacts() {
-            const tbody = $("#contactTableBody");
-            tbody.empty();
-            contacts.forEach(contact => {
-                tbody.append(`
-                    <tr>
-                        <td>${contact.name}</td>
-                        <td>${contact.contact}</td>
-                        <td>${contact.email}</td>
-                        <td>
-                            <button class="btn btn-sm btn-warning" onclick="checkAuth(() => editContact(${contact.id}))"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-sm btn-danger" onclick="checkAuth(() => deleteContact(${contact.id}))"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
-                `);
-            });
-        }
+    const tbody = $("#contactTableBody");
+    tbody.empty();
+    contacts.forEach(contact => {
+        tbody.append(`
+            <tr>
+                <td>${contact.name}</td>
+                <td>${contact.contact}</td>
+                <td>${contact.email}</td>
+                <td>
+                    <button class="btn btn-sm btn-info" onclick="viewContact(${contact.id})"><i class="fas fa-eye"></i></button>
+                    <button class="btn btn-sm btn-warning" onclick="checkAuth(() => editContact(${contact.id}))"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-sm btn-danger" onclick="checkAuth(() => deleteContact(${contact.id}))"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        `);
+    });
+}
 
         function resetForm() {
             $("#contactId").val('');
