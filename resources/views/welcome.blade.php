@@ -148,7 +148,7 @@
         let authToken = null; // Token de autenticação
 
         function fetchContacts() {
-            $.get("http://127.0.0.1:8000/api/contacts", function (data) {
+            $.get("/api/contacts", function (data) {
                 contacts = data;
                 renderContacts();
             });
@@ -200,7 +200,7 @@
             if (localStorage.getItem('isAuthenticated') === 'true') {
                 if (confirm('Are you sure you want to delete this contact?')) {
                     $.ajax({
-                        url: `http://127.0.0.1:8000/api/contacts/${id}`,
+                        url: `/api/contacts/${id}`,
                         type: 'DELETE',
                         headers: {
                             Authorization: `Bearer ${authToken}`
@@ -224,7 +224,7 @@
                     const password = $("#loginPassword").val();
 
                     $.ajax({
-                        url: "http://127.0.0.1:8000/api/login",
+                        url: "/api/login",
                         type: "POST",
                         contentType: "application/json",
                         Accept: "application/json",
@@ -267,7 +267,7 @@
                 };
 
                 const request = {
-                    url: id ? `http://127.0.0.1:8000/api/contacts/${id}` : "http://127.0.0.1:8000/api/contacts",
+                    url: id ? `/api/contacts/${id}` : "/api/contacts",
                     type: id ? "PUT" : "POST",
                     contentType: "application/json",
                     data: JSON.stringify(contactData),
@@ -301,7 +301,7 @@
                 };
 
                 $.ajax({
-                    url: "http://127.0.0.1:8000/api/register",
+                    url: "/api/register",
                     type: "POST",
                     contentType: "application/json",
                     Accept: "application/json",
