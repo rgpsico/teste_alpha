@@ -21,6 +21,7 @@
     <div class="container mt-5">
         <h1 class="text-center">Contact Management</h1>
         <button class="btn btn-primary my-3" onclick="checkAuth(() => $('#contactModal').modal('show'))">Add Contact</button>
+        <button class="btn btn-success my-3" onclick="$('#registerModal').modal('show')">Register</button>
         <button class="btn btn-danger my-3" onclick="logout()">Logout</button>
 
         <!-- Contacts Table -->
@@ -66,6 +67,42 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button type="button" class="btn btn-primary" id="saveContact">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Register -->
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registerModalLabel">Register</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="registerForm">
+                            <div class="mb-3">
+                                <label for="registerName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="registerName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="registerEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="registerPassword" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPasswordConfirmation" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="registerPasswordConfirmation" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="registerButton">Register</button>
                     </div>
                 </div>
             </div>
@@ -248,6 +285,37 @@
                 };
 
                 $.ajax(request);
+            });
+
+            $("#registerButton").click(function () {
+                const name = $("#registerName").val();
+                const email = $("#registerEmail").val();
+                const password = $("#registerPassword").val();
+                const passwordConfirmation = $("#registerPasswordConfirmation").val();
+
+                const registerData = {
+                    name: name,
+                    email: email,
+                    password: password,
+                    password_confirmation: passwordConfirmation
+                };
+
+                $.ajax({
+                    url: "http://127.0.0.1:8000/api/register",
+                    type: "POST",
+                    contentType: "application/json",
+                    Accept: "application/json",
+                    data: JSON.stringify(registerData),
+                    success: function (response) {
+                        authToken = response.token;
+                        localStorage.setItem('isAuthenticated', 'true'); // Armazena a autenticação
+                        $("#registerModal").modal('hide');
+                        alert("Registration successful and logged in.");
+                    },
+                    error: function () {
+                        alert("Registration failed. Please check your input.");
+                    }
+                });
             });
         });
     </script>
