@@ -39,6 +39,28 @@
             </tbody>
         </table>
 
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                Project Observations
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>Implemented a service to handle business logic.</li>
+                    <li>Used localStorage to manage authentication state.</li>
+                    <li>API calls are made using jQuery due to production server incompatibility with Vue.js and Inertia.</li>
+                    <li>Developed basic unit tests to validate core functionality.</li>
+                    <li>Code repository: <a href="https://github.com/rgpsico/teste_alpha" target="_blank">GitHub Link</a></li>
+                </ul>
+                <p>If I had more time, I would:</p>
+                <ul>
+                    <li>Improve the API response handling.</li>
+                    <li>Document the API using tools like Swagger.</li>
+                    <li>Authenticate contacts to ensure data integrity.</li>
+                </ul>
+                <p>Completed the project in approximately 2.5 hours.</p>
+            </div>
+        </div>
+
         <!-- Modal for Adding/Editing Contact -->
         <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
             <div class="modal-dialog">
